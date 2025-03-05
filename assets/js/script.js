@@ -1,28 +1,26 @@
-// Theme Switching
-const themeToggle = document.querySelector('.theme-toggle');
-const htmlElement = document.documentElement;
-const themeIcon = themeToggle.querySelector('i');
-
-themeToggle.addEventListener('click', () => {
-    const currentTheme = htmlElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    
-    htmlElement.setAttribute('data-theme', newTheme);
-    themeIcon.className = newTheme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
-    
-    // Save preference
-    localStorage.setItem('theme', newTheme);
-});
-
-// Check saved theme preference
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme) {
-    htmlElement.setAttribute('data-theme', savedTheme);
-    themeIcon.className = savedTheme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
-}
-
 // Initialize animations when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+    // Theme Switching
+    const themeToggle = document.querySelector('.theme-toggle');
+    const htmlElement = document.documentElement;
+    const themeIcon = themeToggle.querySelector('i');
+
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    htmlElement.setAttribute('data-theme', savedTheme);
+    themeIcon.className = savedTheme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+
+    // Theme toggle functionality
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = htmlElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        
+        htmlElement.setAttribute('data-theme', newTheme);
+        themeIcon.className = newTheme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+        
+        localStorage.setItem('theme', newTheme);
+    });
+
     // Observe elements with animation classes
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -114,6 +112,83 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.quote-container').forEach(el => {
         quoteObserver.observe(el);
     });
+
+    // Observe expertise cards
+    document.querySelectorAll('.expertise-card').forEach(card => {
+        observer.observe(card);
+    });
+
+    // Add this window resize event listener at the end of your DOMContentLoaded event
+    window.addEventListener('resize', () => {
+        const interestsGrid = document.querySelector('.interests-grid');
+        if (window.innerWidth > 768) {
+            interestsGrid.style.display = 'grid';
+            interestsGrid.style.overflow = 'visible';
+        } else {
+            interestsGrid.style.display = 'flex';
+            interestsGrid.style.overflowX = 'auto';
+        }
+    });
+
+    // Single card flip functionality implementation
+    const cards = document.querySelectorAll('.experience-card');
+    console.log('Found cards:', cards.length); // Debug log
+    
+    cards.forEach(card => {
+        card.addEventListener('click', function() {
+            console.log('Card clicked'); // Debug log
+            // Remove flipped class from all other cards
+            cards.forEach(otherCard => {
+                if (otherCard !== card) {
+                    otherCard.classList.remove('flipped');
+                }
+            });
+            // Toggle the clicked card
+            this.classList.toggle('flipped');
+        });
+    });
+
+    // Log to check if script is loading
+    console.log('Script loaded');
+    
+    // Check if cards exist
+    console.log('Found cards:', cards.length);
+    
+    // Add flip functionality
+    cards.forEach(card => {
+        card.addEventListener('click', () => {
+            console.log('Card clicked');
+            card.classList.toggle('flipped');
+        });
+    });
+
+    // Mobile Menu Implementation
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (menuToggle && navLinks) {
+        // Toggle menu on button click
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navLinks.classList.toggle('show');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (navLinks.classList.contains('show') && 
+                !e.target.closest('.nav-links') && 
+                !e.target.closest('.menu-toggle')) {
+                navLinks.classList.remove('show');
+            }
+        });
+
+        // Close menu when clicking a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('show');
+            });
+        });
+    }
 });
 
 // Add animation classes to elements
@@ -137,10 +212,20 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
+            // Adding offset for the fixed navbar
+            const navbarHeight = document.querySelector('.navbar').offsetHeight;
+            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
             });
+            
+            // If it's the mobile menu, close it after clicking
+            const navLinks = document.querySelector('.nav-links');
+            if (navLinks.classList.contains('show')) {
+                navLinks.classList.remove('show');
+            }
         }
     });
 });
@@ -180,27 +265,29 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+});
+
+// Add form submission handling
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
     
-    // Handle contact form submission
-    const contactForm = document.getElementById('contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            try {
-                // Add your form submission logic here
-                const formData = new FormData(contactForm);
-                // Example: Send to your backend or email service
-                // await fetch('YOUR_ENDPOINT', {
-                //     method: 'POST',
-                //     body: formData
-                // });
-                
-                alert('Message sent successfully!');
-                contactForm.reset();
-            } catch (error) {
-                alert('Error sending message. Please try again.');
-            }
-        });
-    }
-}); 
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData);
+    
+    fetch('https://formsubmit.co/ajax/tmulagada.3@gmail.com', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        window.location.href = 'thank-you.html';
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('There was an error sending your message. Please try again.');
+    });
+});

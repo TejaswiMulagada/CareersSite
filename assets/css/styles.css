@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
+
 /* Modern Variables */
 :root {
     --agate-primary: #1a1a1a;
@@ -62,13 +66,69 @@ body {
 nav.navbar {
     background: linear-gradient(
         135deg,
-        rgba(26, 26, 26, 0.97) 0%,
-        rgba(52, 73, 94, 0.95) 25%,
-        rgba(125, 172, 155, 0.90) 100%
+        rgba(26, 26, 26, 0.95) 0%,
+        rgba(52, 73, 94, 0.93) 25%,
+        rgba(125, 172, 155, 0.88) 100%
     ) !important;
     backdrop-filter: blur(10px);
     border: none !important;
     transition: all 0.3s ease;
+}
+
+.navbar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    padding: 1rem 2rem;
+    background: linear-gradient(
+        135deg,
+        rgba(26, 26, 26, 0.95) 0%,
+        rgba(52, 73, 94, 0.93) 25%,
+        rgba(125, 172, 155, 0.88) 100%
+    );
+    backdrop-filter: blur(10px);
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between; /* This ensures space between brand and links */
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-left: auto; /* This pushes the links to the right */
+    margin: 0;
+}
+
+.nav-links a {
+    color: var(--text-primary);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+    opacity: 0.9; /* Make text slightly more visible */
+}
+
+.nav-links a:hover {
+    color: var(--moss-accent);
+}
+
+.brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--moss-accent);
+    margin-right: 2rem;
+    transition: all 0.3s ease;
+}
+
+.brand:hover {
+    color: var(--moss-light);
 }
 
 /* Scrolled state */
@@ -134,9 +194,8 @@ nav.navbar.scrolled {
 
 .nav-links {
     display: flex;
-    gap: 2.5rem;
     align-items: center;
-    list-style: none;
+    gap: 2.5rem;
 }
 
 .nav-link {
@@ -424,7 +483,7 @@ nav.navbar.scrolled {
 
 .moss-outline:hover {
     background: var(--moss-accent);
-    color: var(--white-pure);
+    color: var (--white-pure);
     transform: translateY(-3px);
     box-shadow: 0 6px 20px rgba(125, 172, 155, 0.4);
 }
@@ -647,7 +706,7 @@ section::before {
     position: relative;
     padding: 2.5rem 0;
     overflow: hidden;
-    background: none; /* Remove any existing background */
+    background: none;
 }
 
 /* Remove any existing background colors */
@@ -777,7 +836,7 @@ section::before {
 }
 
 .expertise-card p {
-    color: var(--text-secondary);
+    color: var (--text-secondary);
     font-size: 0.9rem;
     line-height: 1.6;
 }
@@ -1048,7 +1107,22 @@ a:hover {
     background: var(--moss-accent);
     color: var(--white-pure);
     border-color: transparent;
-    box-shadow: var(--neon-glow);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.social-link {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-link:hover {
+    color: var(--moss-accent);
+    transform: translateY(-2px);
 }
 
 /* Button Alignment */
@@ -1333,8 +1407,9 @@ section {
 .expertise-section {
     padding: 2rem 0;
     background: linear-gradient(135deg, 
-        var(--agate-primary) 0%,
-        var(--agate-secondary) 100%);
+    rgba(26, 26, 26, 0.97) 0%,
+    rgba(52, 73, 94, 0.95) 25%,
+    rgba(125, 172, 155, 0.90) 100%);
     position: relative;
     overflow: hidden;
 }
@@ -1529,15 +1604,13 @@ section {
 
 /* Theme Toggle Button */
 .theme-toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1001;
-    background: rgba(125, 172, 155, 0.2);
+    background: rgba(125, 172, 155, 0.2);;
     border: 1px solid rgba(125, 172, 155, 0.3);
     border-radius: 50%;
     width: 40px;
     height: 40px;
+    color: var(--text-color);
+    padding: 0.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1822,9 +1895,9 @@ section {
 
 /* Personal Interests Section */
 .interests-section {
+    position: relative;
     padding: 3rem 0;
     background: var(--agate-primary);
-    position: relative;
 }
 
 .interests-container {
@@ -1835,85 +1908,25 @@ section {
 }
 
 .interests-grid {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
-    padding: 2rem 0;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-.interests-grid::-webkit-scrollbar {
-    display: none;
-}
-
-.interest-card {
-    flex: 0 0 350px;
-    height: 450px;
-    scroll-snap-align: center;
-    position: relative;
-    border-radius: 20px;
-    overflow: hidden;
-    cursor: pointer;
-}
-
-.interest-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-.interest-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(
-        to top,
-        rgba(26, 26, 26, 0.95),
-        rgba(26, 26, 26, 0.7) 60%,
-        transparent
-    );
     padding: 2rem;
-    transform: translateY(70%);
-    transition: transform 0.3s ease;
 }
 
-.interest-card:hover {
-    transform: translateY(-5px);
-}
+@media (max-width: 768px) {
+    .interests-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 1rem;
+        padding: 1rem;
+    }
 
-.interest-card:hover .interest-overlay {
-    transform: translateY(0);
-}
-
-.interest-card:hover .interest-image {
-    transform: scale(1.1);
-}
-
-.interest-title {
-    color: var(--moss-accent);
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.interest-description {
-    color: var(--text-secondary);
-    font-size: 1rem;
-    line-height: 1.6;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.3s ease 0.1s;
-}
-
-.interest-card:hover .interest-description {
-    opacity: 1;
-    transform: translateY(0);
+    .interest-card {
+        flex: 0 0 300px;
+        scroll-snap-align: start;
+    }
 }
 
 /* Connect Section */
@@ -1938,6 +1951,72 @@ section {
     z-index: 1;
 }
 
+.connect-container {
+    position: relative;
+    z-index: 3;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: 2rem;
+    align-items: start;
+}
+
+/* Contact Info Items */
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    backdrop-filter: blur(5px);
+    width: fit-content;
+    min-width: 300px;
+    transition: all 0.3s ease;
+}
+
+.contact-item i {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--moss-accent);
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.contact-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.contact-detail .label {
+    font-size: 0.85rem;
+    color: var(--moss-accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.contact-detail .value {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
 /* Add animated gradient overlay */
 .connect-background::after {
     content: '';
@@ -1958,12 +2037,12 @@ section {
 .connect-container {
     position: relative;
     z-index: 3;
-    max-width: 1200px;
+    max-width: 800px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 1.5rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    gap: 2rem;
 }
 
 /* Enhanced Form Styling */
@@ -1974,6 +2053,7 @@ section {
     padding: 2rem;
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
+    width: 100%;
 }
 
 .contact-form:hover {
@@ -1982,7 +2062,7 @@ section {
 }
 
 .form-group {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     position: relative;
 }
 
@@ -2084,23 +2164,6 @@ section {
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
-    .connect-container {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-
-    .contact-form {
-        padding: 1.5rem;
-    }
-
-    .submit-btn {
-        padding: 1rem 2rem;
-        font-size: 1rem;
-    }
-}
-
-/* Connect Section Header */
 .connect-section .section-header {
     grid-column: 1 / -1; /* Span full width in grid layout */
     text-align: center;
@@ -2158,7 +2221,7 @@ section {
     padding: 0 1rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    gap: 2rem;
 }
 
 /* Responsive adjustments */
@@ -2202,10 +2265,6 @@ section {
 /* Adjust specific section spacings */
 .journey-section {
     padding-bottom: 0;  /* Remove bottom padding */
-}
-
-.expertise-section {
-    padding-top: 2rem;  /* Reduce top padding */
 }
 
 /* Ensure smooth transitions between sections */
@@ -2264,7 +2323,6 @@ html {
 .journey-section {
     position: relative;
     padding: 4rem 0;
-    overflow: hidden;
     background: linear-gradient(
         to bottom right,
         var(--bg-dark) 0%,
@@ -2319,10 +2377,10 @@ html {
 .primary-button {
     background: linear-gradient(
         45deg,
-        var(--moss-accent),
-        var(--moss-dark)
+        var (--moss-accent),
+        var (--moss-dark)
     );
-    color: var(--white-pure) !important;
+    color: var (--white-pure) !important;
     box-shadow: 0 4px 15px rgba(125, 172, 155, 0.2);
     position: relative;
     overflow: hidden;
@@ -2368,8 +2426,58 @@ html {
 .download-container {
     display: flex;
     justify-content: center;
-    margin: 2rem 0;
+    margin-top: 2rem;
+}
+
+.download-container .cta-button {
+    position: relative;
+    padding: 1rem 2rem;
+    background: linear-gradient(45deg, var(--moss-accent), var(--moss-dark));
+    color: var(--white-pure);
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(125, 172, 155, 0.2);
+}
+
+.download-container .cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
     width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.download-container .cta-button:hover::before {
+    left: 100%;
+}
+
+.download-container .cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(125, 172, 155, 0.4);
+}
+
+.download-container .cta-button i {
+    transition: transform 0.3s ease;
+}
+
+.download-container .cta-button:hover i {
+    transform: translateY(-2px);
 }
 
 /* Light mode specific styles */
@@ -2399,4 +2507,806 @@ html {
 /* Hover state for nav links */
 .nav-link:hover {
     color: var(--moss-accent) !important;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Add these CSS animations first */
+@keyframes float {
+    0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+        transform: translate(10px, -10px) rotate(5deg);
+    }
+    50% {
+        transform: translate(0, -20px) rotate(0deg);
+    }
+    75% {
+        transform: translate(-10px, -10px) rotate(-5deg);
+    }
+}
+
+/* Update the tech particles styling */
+.floating-symbols {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.symbol {
+    position: absolute;
+    color: rgba(125, 172, 155, 0.2);
+    font-size: 1.5rem;
+}
+
+/* Distributed positions for symbols */
+.symbol:nth-child(1) { left: 5%; top: 20%; animation: float 7s infinite; }
+.symbol:nth-child(2) { left: 15%; top: 60%; animation: float 9s infinite; }
+.symbol:nth-child(3) { left: 25%; top: 30%; animation: float 8s infinite; }
+.symbol:nth-child(4) { left: 35%; top: 70%; animation: float 10s infinite; }
+.symbol:nth-child(5) { right: 35%; top: 25%; animation: float 7.5s infinite; }
+.symbol:nth-child(6) { right: 25%; top: 65%; animation: float 8.5s infinite; }
+.symbol:nth-child(7) { right: 15%; top: 35%; animation: float 9.5s infinite; }
+.symbol:nth-child(8) { right: 5%; top: 75%; animation: float 8s infinite; }
+.symbol:nth-child(9) { left: 45%; top: 15%; animation: float 7.8s infinite; }
+.symbol:nth-child(10) { right: 45%; top: 55%; animation: float 8.2s infinite; }
+.symbol:nth-child(11) { left: 55%; top: 45%; animation: float 9.2s infinite; }
+.symbol:nth-child(12) { right: 55%; top: 85%; animation: float 7.2s infinite; }
+
+/* Add these styles for the role description */
+.role-description {
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: flex-start;
+}
+
+.role-text {
+    background: linear-gradient(
+        45deg,
+        var(--moss-dark),
+        var(--moss-accent)
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmerText 3s linear infinite;
+}
+
+.role-separator {
+    color: var(--moss-dark);
+    opacity: 0.8;
+}
+
+@keyframes shimmerText {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 200% 50%;
+    }
+}
+
+/* Remove theme-specific color changes */
+[data-theme="light"] .role-text,
+[data-theme="dark"] .role-text {
+    background: linear-gradient(
+        45deg,
+        var(--moss-dark),
+        var(--moss-accent)
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Add these styles for the role description */
+.role-description {
+    background: linear-gradient(
+        45deg,
+        var(--moss-accent),
+        var(--moss-light),
+        var(--moss-dark)
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    animation: shimmerText 3s linear infinite;
+    position: relative;
+    display: inline-block;
+    padding: 0.5rem 0;
+}
+
+.role-description::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--moss-accent),
+        var(--moss-light),
+        var(--moss-dark),
+        transparent
+    );
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: lineGrow 3s ease-in-out infinite;
+}
+
+/* Add these animations */
+@keyframes shimmerText {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 200% 50%;
+    }
+}
+
+@keyframes lineGrow {
+    0%, 100% {
+        transform: scaleX(0);
+    }
+    50% {
+        transform: scaleX(1);
+    }
+}
+
+/* Theme transition effect */
+[data-theme="light"] .role-description {
+    background: linear-gradient(
+        45deg,
+        var(--moss-dark),
+        var (--agate-secondary),
+        var (--moss-accent)
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Add responsive adjustments */
+@media (max-width: 768px) {
+    .role-description {
+        font-size: 1.2rem;
+    }
+}
+
+.interest-card {
+    flex: 0 0 350px;
+    height: 450px;
+    scroll-snap-align: center;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    /* Add glaze border effect */
+    padding: 1px;  /* Space for the gradient border */
+    background: linear-gradient(
+        135deg,
+        rgba(125, 172, 155, 0.3),
+        rgba(255, 255, 255, 0.1),
+        rgba(125, 172, 155, 0.3)
+    );
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+/* Add inner container to maintain border effect */
+.interest-card::before {
+    content: '';
+    position: absolute;
+    inset: 1px;  /* Creates border effect */
+    background: rgba(26, 26, 26, 0.8);
+    border-radius: 19px;
+    z-index: 0;
+}
+
+/* Update hover effect */
+.interest-card:hover {
+    transform: translateY(-5px);
+    background: linear-gradient(
+        135deg,
+        rgba(125, 172, 155, 0.5),
+        rgba(255, 255, 255, 0.2),
+        rgba(125, 172, 155, 0.5)
+    );
+    box-shadow: 0 10px 30px rgba(125, 172, 155, 0.2);
+}
+
+/* Ensure content stays above the border effect */
+.interest-image, 
+.interest-overlay {
+    position: relative;
+    z-index: 1;
+}
+
+/* Light mode adjustments */
+[data-theme="light"] .interest-card {
+    background: linear-gradient(
+        135deg,
+        rgba(125, 172, 155, 0.4),
+        rgba(255, 255, 255, 0.2),
+        rgba(125, 172, 155, 0.4)
+    );
+}
+
+[data-theme="light"] .interest-card::before {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.interest-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.interest-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(
+        to top,
+        rgba(26, 26, 26, 0.95),
+        rgba(26, 26, 26, 0.7) 60%,
+        transparent
+    );
+    padding: 2rem;
+    transform: translateY(70%);
+    transition: transform 0.3s ease;
+}
+
+.interest-card:hover {
+    transform: translateY(-5px);
+}
+
+.interest-card:hover .interest-overlay {
+    transform: translateY(0);
+}
+
+.interest-card:hover .interest-image {
+    transform: scale(1.1);
+}
+
+.interest-title {
+    color: var(--moss-accent);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.interest-description {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.6;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease 0.1s;
+}
+
+.interest-card:hover .interest-description {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.interests-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+@media (max-width: 768px) {
+    .interests-grid {
+        grid-template-columns: 1fr;
+        padding: 0.5rem;
+    }
+
+    .interest-card {
+        height: 400px;
+    }
+}
+
+/* Navbar styles */
+.navbar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    padding: 1rem 2rem;
+    background: linear-gradient(
+        135deg,
+        rgba(26, 26, 26, 0.97) 0%,
+        rgba(52, 73, 94, 0.95) 25%,
+        rgba(125, 172, 155, 0.90) 100%
+    );
+    backdrop-filter: blur(10px);
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--moss-accent);
+    margin-right: 2rem;
+    transition: all 0.3s ease;
+}
+
+.brand:hover {
+    color: var(--moss-light);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-left: auto;
+}
+
+.nav-links a {
+    color: var(--text-primary);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+    opacity: 0.9; /* Make text slightly more visible */
+}
+
+.nav-links a:hover {
+    color: var(--moss-accent);
+}
+
+/* Mobile menu button */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+        margin-left: auto;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 2rem; /* Position from right instead of full width */
+        width: auto; /* Remove full width */
+        background: none; /* Remove background */
+        padding: 0.5rem;
+        flex-direction: column;
+        align-items: flex-end; /* Align to right */
+        gap: 0.8rem;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .nav-links a {
+        background: linear-gradient(
+            135deg,
+            rgba(26, 26, 26, 0.95),
+            rgba(52, 73, 94, 0.95)
+        );
+        padding: 0.8rem 1.5rem;
+        border-radius: 30px;
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(10px);
+        width: auto;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    .nav-links a:hover {
+        transform: translateX(-5px);
+        background: linear-gradient(
+            135deg,
+            rgba(125, 172, 155, 0.2),
+            rgba(125, 172, 155, 0.3)
+        );
+        border-color: var(--moss-accent);
+    }
+
+    .theme-toggle {
+        background: linear-gradient(
+            135deg,
+            rgba(26, 26, 26, 0.95),
+            rgba(52, 73, 94, 0.95)
+        );
+        border: 1px solid var(--glass-border);
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0.5rem;
+    }
+}
+
+/* Theme toggle button */
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    color: var(--moss-accent);
+}
+
+/* Personal Interests Section */
+@media (min-width: 769px) {
+    .interests-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Show 3 cards on desktop */
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .interests-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 1rem;
+        padding: 1rem;
+        grid-template-columns: none;
+    }
+
+    .interest-card {
+        flex: 0 0 300px;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.contact-item:hover {
+    transform: translateX(5px);
+    border-color: var(--moss-accent);
+}
+
+.contact-item:hover i {
+    background: var(--moss-dark);
+    transform: scale(1.1);
+}
+
+/* Connect Section Responsive Styles */
+.connect-section {
+    position: relative;
+    padding: 3rem 0;
+    overflow: hidden;
+}
+
+.connect-container {
+    position: relative;
+    z-index: 3;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Media queries for responsiveness */
+@media screen and (max-width: 768px) {
+    .connect-container {
+        padding: 0 1rem;
+    }
+
+    .contact-item {
+        width: 100%; /* Full width on mobile */
+        flex-direction: row; /* Keep icon and text in a row */
+        align-items: center;
+    }
+
+    .contact-detail {
+        flex: 1; /* Take remaining space */
+    }
+
+    .contact-detail .value {
+        font-size: 0.9rem; /* Smaller font on mobile */
+    }
+
+    .contact-item i {
+        width: 30px; /* Slightly smaller icons on mobile */
+        height: 30px;
+        font-size: 1rem;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .contact-item {
+        width: fit-content; /* Adjust to content on desktop */
+        min-width: 280px;
+    }
+}
+
+/* Professional Journey Cards Styling */
+.journey-card {
+    position: relative;
+    padding: 2px;  /* Thicker border */
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    background: linear-gradient(
+        135deg,
+        rgba(125, 172, 155, 0.5),  /* Increased opacity for visibility */
+        rgba(255, 255, 255, 0.2),
+        rgba(125, 172, 155, 0.5)
+    );
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(125, 172, 155, 0.2);
+}
+
+/* Inner container */
+.journey-card::before {
+    content: '';
+    position: absolute;
+    inset: 2px;  /* Match padding */
+    background: rgba(26, 26, 26, 0.95);
+    border-radius: 18px;
+    z-index: 0;
+}
+
+.journey-content {
+    position: relative;
+    z-index: 1;
+    padding: 2rem;
+}
+
+/* Company logo/icon styling */
+.company-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(125, 172, 155, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.company-icon i {
+    font-size: 1.5rem;
+    color: var(--moss-accent);
+    transition: all 0.3s ease;
+}
+
+/* Text styling */
+.role-title {
+    color: var(--moss-accent);
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.company-name {
+    color: var(--text-primary);
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.duration {
+    color: var(--moss-light);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+/* Hover effect */
+.journey-card:hover {
+    transform: translateY(-5px);
+    background: linear-gradient(
+        135deg,
+        rgba(125, 172, 155, 0.7),
+        rgba(255, 255, 255, 0.3),
+        rgba(125, 172, 155, 0.7)
+    );
+    box-shadow: 0 10px 30px rgba(125, 172, 155, 0.3);
+}
+
+.journey-card:hover .company-icon {
+    background: var(--moss-accent);
+    transform: scale(1.1);
+}
+
+.journey-card:hover .company-icon i {
+    color: var(--white-pure);
+}
+
+/* Animation for cards */
+.journey-card {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.journey-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.journey-card:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Light mode adjustments */
+[data-theme="light"] .journey-card::before {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+[data-theme="light"] .role-title {
+    color: var(--moss-dark);
+}
+
+[data-theme="light"] .company-name {
+    color: var(--agate-primary);
+
+}
+}
+
+/* Hire Me Button */
+.hire-me-btn {
+    background: var(--moss-accent);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.hire-me-btn:hover {
+    transform: translateY(-2px);
+    background: var(--moss-dark);
+    box-shadow: 0 4px 15px rgba(125, 172, 155, 0.3);
+}
+
+.hire-me-btn .btn-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.hire-me-btn .btn-glow {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+}
+
+.hire-me-btn:hover .btn-glow {
+    transform: translateX(100%);
+}
+
+.hire-me-btn i {
+    font-size: 1.1rem;
+}
+
+/* Add these styles for the thank you page */
+.thank-you-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-primary);
+    padding: 2rem;
+}
+
+.thank-you-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    padding: 3rem;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    max-width: 500px;
+    width: 90%;
+}
+
+.success-icon {
+    color: var(--moss-accent);
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+}
+
+.thank-you-card h1 {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.thank-you-card p {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background: var(--moss-accent);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: var(--moss-dark);
+    transform: translateY(-2px);
 }

@@ -124,7 +124,7 @@
     height: 100%;
     cursor: pointer;
     transform-style: preserve-3d;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.6s;
 }
 
 .card-front,
@@ -150,7 +150,27 @@
 
 .card-back {
     transform: rotateY(180deg);
+    backface-visibility: hidden;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
     overflow-y: auto;
+}
+
+/* Add custom scrollbar for better visibility */
+.card-back::-webkit-scrollbar {
+    width: 4px;
+    position: absolute;
+    right: 0;
+}
+
+.card-back::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.card-back::-webkit-scrollbar-thumb {
+    background: var(--moss-accent);
+    border-radius: 4px;
 }
 
 .experience-card.flipped {
@@ -159,19 +179,32 @@
 
 /* Card Content Styles */
 .company-logo {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: rgba(125, 172, 155, 0.1);
     display: flex;
-    align-items: center;
     justify-content: center;
-    margin-bottom: 1rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    margin-top: 1rem; /* Add some space at top */
 }
 
 .company-logo i {
     font-size: 1.5rem;
     color: var(--moss-accent);
+}
+
+.company-logo img {
+    width: 120px;  /* Doubled from 60px */
+    height: 120px; /* Doubled from 60px */
+    object-fit: contain;
+    border-radius: 12px; /* Increased for better proportion */
+    padding: 8px; /* Slightly increased padding */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border: 1px solid var(--glass-border);
+    transition: transform 0.3s ease;
+}
+
+.company-logo img:hover {
+    transform: scale(1.05); /* Reduced scale effect for larger icons */
 }
 
 .role-title {
@@ -207,6 +240,8 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    height: 100%;
+    overflow-y: auto;
 }
 
 .key-points li {
@@ -228,6 +263,8 @@
 /* Custom Scrollbar */
 .card-back::-webkit-scrollbar {
     width: 4px;
+    position: absolute;
+    right: 0;
 }
 
 .card-back::-webkit-scrollbar-thumb {
@@ -245,4 +282,4 @@
     .card-deck {
         height: 360px;
     }
-} 
+}
