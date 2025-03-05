@@ -1,0 +1,18 @@
+name: Deploy to IONOS
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: 📂 Deploy to IONOS
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: home199147936.1and1-data.host
+        username: u199147936
+        password: ${{ secrets.FTP_PASSWORD }}
+        server-dir: /
