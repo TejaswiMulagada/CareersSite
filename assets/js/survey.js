@@ -16,16 +16,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Choice cards selection
+    // Handle choice card selection
     document.querySelectorAll('.choice-card').forEach(card => {
         const radio = card.querySelector('input[type="radio"]');
         
-        card.addEventListener('click', () => {
-            radio.checked = true;
-            document.querySelectorAll('.choice-card').forEach(c => {
-                c.classList.remove('selected');
-            });
+        // Add initial selected state if radio is checked
+        if (radio.checked) {
             card.classList.add('selected');
+        }
+        
+        card.addEventListener('click', () => {
+            // Remove selected class from all cards in the same group
+            const name = radio.getAttribute('name');
+            document.querySelectorAll(`input[name="${name}"]`).forEach(input => {
+                input.closest('.choice-card').classList.remove('selected');
+            });
+            
+            // Add selected class to clicked card
+            card.classList.add('selected');
+            radio.checked = true;
         });
     });
 
@@ -65,6 +74,36 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('survey-data', JSON.stringify(new FormData(form)));
             showSavedIndicator();
         }, saveTimeout);
+    });
+
+    // Handle "Other" option for role
+    const otherRadio = document.getElementById('role-other-radio');
+    const otherText = document.getElementById('role-other-text');
+
+    otherRadio.addEventListener('change', () => {
+        if (otherRadio.checked) {
+            otherText.style.display = 'block';
+            otherText.required = true;
+        }
+    });
+
+    document.querySelectorAll('input[name="role"]').forEach(radio => {
+        if (radio !== otherRadio) {
+            radio.addEventListener('change', () => {
+                if (radio.checked) {
+                    otherText.style.display = 'none';
+                    otherText.required = false;
+                    otherText.value = ''; // Clear the text input
+                }
+            });
+        }
+    });
+
+    // Ensure the "Other" text is included in the form submission
+    form.addEventListener('submit', (event) => {
+        if (otherRadio.checked && otherText.value.trim() !== '') {
+            otherRadio.value = `Other: ${otherText.value.trim()}`;
+        }
     });
 
     // Add this to create dynamic symbols

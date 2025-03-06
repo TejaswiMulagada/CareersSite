@@ -388,7 +388,7 @@ select option:first-child {
 [data-theme="light"] .radio-group label,
 [data-theme="light"] .checkbox-group label {
     background: rgba(255, 255, 255, 0.1);
-    color: var(--text-primary);
+    color: var (--text-primary);
 }
 
 .skill-label {
@@ -436,34 +436,57 @@ select option:first-child {
 .choice-card {
     position: relative;
     cursor: pointer;
-    text-align: center;
-    padding: 2rem 1.5rem;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(125, 172, 155, 0.05));
+    padding: 1.2rem 1.5rem;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.05),
+        rgba(125, 172, 155, 0.05)
+    );
     border: 2px solid var(--glass-border);
-    border-radius: 15px;
+    border-radius: 12px;
     transition: all 0.3s ease;
-}
-
-.choice-card input[type="radio"] {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    cursor: pointer;
-    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .choice-card:hover {
     transform: translateY(-3px);
     border-color: var(--moss-accent);
-    background: linear-gradient(135deg, rgba(125, 172, 155, 0.1), rgba(125, 172, 155, 0.05));
+    background: linear-gradient(
+        135deg,
+        rgba(125, 172, 155, 0.1),
+        rgba(255, 255, 255, 0.05)
+    );
+    box-shadow: 0 10px 20px rgba(125, 172, 155, 0.1);
 }
 
 .choice-card.selected,
-.choice-card input[type="radio"]:checked + .choice-card {
-    background: linear-gradient(135deg, rgba(125, 172, 155, 0.2), rgba(125, 172, 155, 0.1));
+.choice-card input[type="radio"]:checked + label {
+    background: linear-gradient(
+        135deg,
+        rgba(125, 172, 155, 0.2),
+        rgba(125, 172, 155, 0.1)
+    );
     border-color: var(--moss-accent);
+    box-shadow: 0 5px 15px rgba(125, 172, 155, 0.2);
+}
+
+.choice-card input[type="radio"]:checked ~ .choice-content::after {
+    content: '\f00c';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    color: var (--moss-accent);
+    font-size: 1.2rem;
+    animation: scaleIn 0.3s ease;
+}
+
+.choice-card:active {
+    transform: scale(0.98);
 }
 
 .choice-card i {
@@ -694,25 +717,10 @@ textarea::placeholder {
     animation-duration: 30s;
 }
 
-/* Optimize for Safari */
-@supports (-webkit-backdrop-filter: none) {
-    .floating-symbols i {
-        transform: translateZ(0);
-        backface-visibility: hidden;
-    }
-}
-
 /* Update background and section styles */
 :root {
     --section-bg: rgba(255, 255, 255, 0.03);
     --glass-border: rgba(125, 172, 155, 0.3);
-}
-
-/* Add specific Safari fixes */
-@supports (-webkit-backdrop-filter: none) {
-    .survey-section-group {
-        background: rgba(255, 255, 255, 0.1);
-    }
 }
 
 /* Add these at the end of your existing survey.css file */
@@ -830,14 +838,6 @@ textarea::placeholder {
     animation-direction: reverse;
 }
 
-/* Optimize for Safari */
-@supports (-webkit-backdrop-filter: none) {
-    .floating-symbols i {
-        transform: translateZ(0);
-        backface-visibility: hidden;
-    }
-}
-
 /* Survey Thank You Page Styles */
 .survey-thanks-section {
     min-height: 100vh;
@@ -927,4 +927,18 @@ textarea::placeholder {
 @keyframes scaleIn {
     from { transform: scale(0); }
     to { transform: scale(1); }
+}
+/* Add this at the very end of your survey.css file */
+@media screen and (min-color-index:0) and(-webkit-min-device-pixel-ratio:0) { 
+    @media {
+        .survey-description {
+            background-image: none !important;
+            background: rgba(30, 30, 30, 0.8) !important;
+            backdrop-filter: blur(10px);
+        }
+        
+        [data-theme="light"] .survey-description {
+            background: rgba(230, 230, 230, 0.8) !important;
+        }
+    }
 }

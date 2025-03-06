@@ -1429,7 +1429,7 @@ section {
 
 .skill-category {
     background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--glass-border);
+    border: 1px solid var (--glass-border);
     border-radius: 12px;
     padding: 1.5rem;
     transition: all 0.3s ease;
@@ -3309,4 +3309,81 @@ html {
 .back-btn:hover {
     background: var(--moss-dark);
     transform: translateY(-2px);
+}
+
+/* Update contact section for mobile */
+@media (max-width: 768px) {
+    .contact-section {
+        flex-direction: column;  /* Changed from column-reverse */
+        padding: 2rem 1rem;
+    }
+
+    .contact-info {
+        order: 1;  /* This comes first */
+        width: 100%;
+        margin: 1rem 0;
+    }
+
+    .contact-form {
+        order: 2;  /* This comes second */
+        width: 100%;
+        margin: 1rem 0;
+        position: relative;
+        z-index: 2;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--glass-border);
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    /* Ensure proper spacing */
+    .connect-container {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Make container take full width */
+    .connect-section .container,
+    .contact-container {
+        width: 100%;
+        padding: 1rem;
+    }
+}
+
+/* Navbar Link Colors */
+.nav-link,
+.navbar-nav .nav-link {
+    color: var(--moss-accent) !important; /* Use moss-accent for both light and dark mode */
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 0.5rem 0 !important;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--moss-dark) !important; /* Darker shade on hover */
+    transform: translateY(-1px);
+}
+
+/* Ensure navbar links are visible in light mode */
+[data-theme="light"] .nav-link,
+[data-theme="light"] .navbar-nav .nav-link,
+[data-theme="light"] .nav-links a {
+    color: var(--moss-accent) !important; /* Match brand color */
+}
+
+[data-theme="light"] .nav-link:hover,
+[data-theme="light"] .nav-link.active,
+[data-theme="light"] .nav-links a:hover {
+    color: var(--moss-dark) !important;
+}
+
+/* Safari-specific fix for survey sections */
+@media not all and (min-resolution:.001dpcm) { 
+    @supports (-webkit-appearance:none) {
+        .survey-description {
+            background: var(--section-bg) !important; /* Use same background as working sections */
+        }
+    }
 }
